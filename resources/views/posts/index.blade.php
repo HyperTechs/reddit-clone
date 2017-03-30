@@ -17,7 +17,7 @@
                             {{ method_field('DELETE') }}
 
                             <button type="submit" class="btn btn-danger">Delete</button>
-                            
+
                         </form>
                     </small>
                 </h2>
