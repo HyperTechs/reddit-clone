@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>
-                    <a href="{{ route('post_patch', ['post' => $post->id ]) }}">{{ $post->title }} </a>
+                    <a href="{{ route('posts_path', ['post' => $post->id ]) }}">{{ $post->title }} </a>
                 </h2>
 
                 <p>Posted {{ $post->created_at->diffForHumans() }}</p>
@@ -15,4 +15,6 @@
         </div>
         <hr>
     @endforeach
+
+    {{ $posts->render() }}
 @endsection
