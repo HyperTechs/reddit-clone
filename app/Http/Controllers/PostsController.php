@@ -51,7 +51,7 @@ class PostsController extends Controller
         */
         //dd($request->all());
 
-        $post = Post::created($request->only('title', 'description', 'url'));
+        $post = Post::create($request->only('title', 'description', 'url'));
 
         session()->flash('message', 'Post Creado');
 
