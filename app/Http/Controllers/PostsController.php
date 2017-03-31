@@ -15,7 +15,7 @@ class PostsController extends Controller
 
         $posts = Post::orderBY('id', 'desc')->paginate(10);
 
-        return view('posts.index')->with('posts', $posts);
+        return view('posts.index')->with(['posts' => $posts]);
     }
 
     public function show( Post $post)
@@ -28,17 +28,19 @@ class PostsController extends Controller
                 abort(404);
             }
         */
-        return view('posts.show')->with('post', $post);
+        return view('posts.show')->with(['post' => $post]);
     }
 
     public function create()
     {
+        $post = new Post;
 
-        return view('posts.create');
+        return view('posts.create')->with([ 'post' => $post]);
     }
 
     public function store(CreatePostRequest $request)
     {
+
         /*
             $post = new Post;
 
@@ -50,6 +52,8 @@ class PostsController extends Controller
         //dd($request->all());
 
         $post = Post::created($request->only('title', 'description', 'url'));
+
+        session()->flash('message', 'Post Creado');
 
         return redirect()->route('posts_path');
     }
@@ -65,12 +69,16 @@ class PostsController extends Controller
             $request->only('title', 'description', 'url')
         );
 
+        session()->flash('message', 'Post Update');
+
         return redirect()->route('post_path', [ 'post' => $post->id ]);
     }
 
     public function delete(Post $post)
     {
         $post->delete();
+
+        session()->flash('message', 'Post Deleted');
 
         return redirect()->route('posts_path');
     }
